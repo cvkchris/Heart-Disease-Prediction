@@ -9,6 +9,9 @@ df1 = pd.read_csv("heart(1).csv")
 df2 = pd.read_csv('heart.csv')
 df = pd.concat([df1, df2], ignore_index=True)
 
+del df['exang']
+del df['oldpeak']
+
 features = df.columns[0:12].values.tolist()
 x = df[features]
 y = df['target']
