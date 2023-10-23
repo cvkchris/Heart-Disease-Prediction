@@ -59,7 +59,7 @@ def main():
       thal_num = 3
 
     # Create a feature array with the user's input
-    features = [[age,sex_num,cp,trestbps,chol,fbs_num,restecg, thalach, slope, ca, thal_num]]
+    features = np.array[[age,sex_num,cp,trestbps,chol,fbs_num,restecg, thalach, slope, ca, thal_num]]
 
     # Make predictions using the kNN model
     prediction = model.predict(features)
