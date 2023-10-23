@@ -12,7 +12,8 @@ df = pd.concat([df1, df2], ignore_index=True)
 del df['exang']
 del df['oldpeak']
 
-features = df.columns[0:12].values.tolist()
+features = df.columns[0:11].values.tolist()
+
 x = df[features]
 y = df['target']
 
@@ -35,10 +36,11 @@ def main():
     trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
     chol = int(st.slider("Cholesterol level in mg/dl",125,560))
     fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
-    restecg = st.radio("Resting ECG Result", ['0','1','2','3'])
+    restecg = st.radio("Resting ECG Result", [0,1,2,3])
+
     thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
-    slope = st.radio("Slope of Peak Exercise ST Segment", ['0','1','2'])
-    ca = st.radio("Number of Major Vessels colored by Flourosopy", ['0','1','2','3','4'])
+    slope = st.radio("Slope of Peak Exercise ST Segment", [0,1,2])
+    ca = st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4])
     thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
     if sex == "MALE":
