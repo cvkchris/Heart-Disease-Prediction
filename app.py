@@ -42,35 +42,39 @@ def main():
     thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
     if sex == "MALE":
-      sex = 1
+      sex_num = 1
     else:
-      sex = 0
+      sex_num = 0
 
     if fbs == "YES":
-      fbs = 1
+      fbs_num = 1
     else:
-      fbs = 0
+      fbs_num = 0
 
     if thal == "Normal":
-      thal = 1
+      thal_num = 1
     elif thal == 'Fixed Defect':
-      thal = 2
+      thal_num = 2
     else:
-      thal = 3
+      thal_num = 3
 
     # Create a feature array with the user's input
-    features = np.array([[age,sex,cp,trestbps,chol,fbs,restecg, thalach, slope, ca, thal]])
+    features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg, thalach, slope, ca, thal_num]])
 
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
-    if prediction == 1:
-      prediction = "Heart Disease"
-    else:
-      prediction = "NO Heart Disease"
+    predict_button = st.button("Predict")
+    
+    if predict_button: 
+        if prediction == 1:
+            prediction_txt = "Heart Disease"
+        else:
+            prediction_txt = "NO Heart Disease"
 
-    # Display the prediction
-    st.write(f'The Patient has {prediction}')
+        # Display the prediction
+        st.write(f'The Patient has {prediction_txt}')
+    
 
 if __name__ == '__main__':
     main()
