@@ -65,7 +65,7 @@ def predict():
       thal_num = 3
 
     # Create a feature array with the user's input
-    features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg, thalach, slope, ca, thal_num]])
+    features = np.array([[int(age),int(sex_num),int(cp),int(trestbps),int(chol),int(fbs_num),int(restecg), int(thalach), int(slope), int(ca), int(thal_num)]])
 
     # Make predictions using the kNN model
     prediction = model.predict(features)
@@ -121,8 +121,6 @@ age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 if heart_disease:
   try:
     st.subheader("Predict Heart Disease")
-
-    
     predicted = predict()
     st.subheader("Result")
     st.info(f"The Patient Has {predicted}")
