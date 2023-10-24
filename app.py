@@ -67,7 +67,7 @@ def predict():
     prediction = model.predict(features)
 
     predict_button = st.button("Predict")
-    
+    prediction_txt = "None"
     if predict_button: 
         if prediction == 1:
           prediction_txt = "Heart Disease"
