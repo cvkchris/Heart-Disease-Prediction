@@ -125,28 +125,7 @@ heart_disease = st.sidebar.button("Predict Heart Disease")
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
 
-if heart_disease:
-  try:
-    st.subheader("Predict Heart Disease")
-    prediction = predict()
-
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
-    
-  except Exception as e:
-      st.text(f"An error occurred: {e}")
-
-elif age_wise_plot:
-    st.subheader("Number of Heart Patients Age-wise")
-    fig = age_wise()
-    st.plotly_chart(fig)
-
-elif thalach_count_plot:
-    st.subheader("Number of Heart Patients W.R.T Thalach")
-    fig = thalach_count()
-    st.plotly_chart(fig)
-
-else:
+if about:
   #About
   st.subheader("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
@@ -169,3 +148,24 @@ else:
 
   #Background Image Credits
   st.caption("Image by kjpargeter on Freepik")
+
+if heart_disease:
+  try:
+    st.subheader("Predict Heart Disease")
+    prediction = predict()
+
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction}")
+    
+  except Exception as e:
+      st.text(f"An error occurred: {e}")
+
+if age_wise_plot:
+    st.subheader("Number of Heart Patients Age-wise")
+    fig = age_wise()
+    st.plotly_chart(fig)
+
+if thalach_count_plot:
+    st.subheader("Number of Heart Patients W.R.T Thalach")
+    fig = thalach_count()
+    st.plotly_chart(fig)  
