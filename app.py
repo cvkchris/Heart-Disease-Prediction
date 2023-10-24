@@ -89,8 +89,11 @@ def age_wise():
   fig.update_layout(title_x=0.5)
   return fig
 
-def click_button():
+def on_button():
     st.session_state.clicked = True
+
+def off_button():
+  st.session_state.clicked = False
 
 st.markdown(
         f"""
@@ -112,9 +115,9 @@ st.title('Heart Disease Prediction using kNN')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About")
-heart_disease = st.sidebar.button("Predict Heart Disease", on_click=click_button)
-age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
-thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
+heart_disease = st.sidebar.button("Predict Heart Disease", on_click=on_button)
+age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
+thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
 
 if 'clicked' not in st.session_state:
   st.session_state.clicked = False
