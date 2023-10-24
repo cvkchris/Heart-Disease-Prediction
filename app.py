@@ -141,11 +141,13 @@ if st.session_state.clicked == True:
   st.info(f"The Patient Has {prediction}")
 
 elif age_wise_plot:
+    st.session_state.clicked = False
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
     st.plotly_chart(fig)
 
 elif thalach_count_plot:
+    st.session_state.clicked = False
     st.subheader("Number of Heart Patients W.R.T Thalach")
     fig = thalach_count()
     st.plotly_chart(fig)  
