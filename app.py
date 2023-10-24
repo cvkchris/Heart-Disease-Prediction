@@ -80,7 +80,9 @@ def predict():
         else:
           prediction_txt = "None"          
 
-    return prediction_txt
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction_txt}")
+
 
 def age_wise():
   df1 = df[['age', 'target']]
@@ -121,19 +123,17 @@ age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 if heart_disease:
   try:
     st.subheader("Predict Heart Disease")
-    predicted = predict()
-    st.subheader("Result")
-    st.info(f"The Patient Has {predicted}")
-
+    predict()
+    
   except Exception as e:
       st.text(f"An error occurred: {e}")
 
-if age_wise_plot:
+elif age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
     st.plotly_chart(fig)
 
-if about:
+else:
   #About
   st.header("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
