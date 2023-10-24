@@ -66,7 +66,7 @@ def predict():
 
     # Create a feature array with the user's input
     features = np.array([[int(age),int(sex_num),int(cp),int(trestbps),int(chol),int(fbs_num),int(restecg), int(thalach), int(slope), int(ca), int(thal_num)]])
-
+    print(features)
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
