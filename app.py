@@ -43,6 +43,10 @@ def predict():
     ca = st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4])
     thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
+    sex_num = 0
+    fbs_num = 0
+    thal_num = 1
+    
     if sex == "MALE":
       sex_num = 1
     else:
