@@ -89,6 +89,24 @@ def age_wise():
   fig.update_layout(title_x=0.5)
   return fig
 
+def gender_distribution():
+  df3 = df[['sex', 'target']].copy()
+  df3['target'].replace(0, None, inplace=True)
+
+  df3 = df3.dropna()
+
+  df3['sex'] = df3['sex'].map({1:'Male', 0:'Female'})
+
+  gender_distribution = df3['sex'].value_counts().reset_index()
+
+  gender_distribution.columns = ['Gender', 'Count']
+
+  fig = px.pie(gender_distribution, names='Gender', values='Count', title='Distribution of Gender in Heart Patients', 
+              labels={'Gender': 'Gender'}, hole=0.3)
+
+  fig.update_layout(title_x=0.5)
+  return fig
+
 def on_button():
     st.session_state.clicked = True
 
@@ -118,6 +136,7 @@ about = st.sidebar.button("About", on_click=off_button)
 heart_disease = st.sidebar.button("Predict Heart Disease", on_click=on_button)
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
+gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
 
 if 'clicked' not in st.session_state:
   st.session_state.clicked = False
@@ -151,7 +170,12 @@ elif age_wise_plot:
 elif thalach_count_plot:
     st.subheader("Number of Heart Patients W.R.T Thalach")
     fig = thalach_count()
-    st.plotly_chart(fig)  
+    st.plotly_chart(fig) 
+
+elif gender_distribution_plot:
+    st.subheader("Gender Distribution of Heart Diseased Patients")
+    fig = gender_distribution()
+    st.plotly_chart(fig) 
 
 else:
   #About
