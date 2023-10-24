@@ -2,6 +2,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier as knn
 
@@ -23,9 +24,8 @@ model  = knn(n_neighbors=3)
 
 model = model.fit(X_train, Y_train)
 
-# y_pred = model.predict(X_test)
 
-def main():
+def predict():
     st.title('Heart Disease Prediction using kNN')
     st.write('This app uses kNN to predict whether a patient has heart disease or not')
 
@@ -74,9 +74,71 @@ def main():
         else:
             prediction_txt = "NO Heart Disease"
 
-        # Display the prediction
-        st.write(f'The Patient has {prediction_txt}')
-    
+    return prediction_txt
 
-if __name__ == '__main__':
-    main()
+def age_wise():
+  df1 = df[['age', 'target']]
+  df1 = df1[df1['target']==1]
+  df1 = pd.DataFrame(df1.groupby('age')['target'].count())
+
+  fig = px.bar(df1, x=df1.index, y="target")
+  fig.update_layout(
+    xaxis_title="Age",
+    yaxis_title="Number of Heart Patients",
+    title="Number of Heart Patients VS Age"
+  )
+  fig.update_layout(title_x=0.5)
+  return fig
+
+st.markdown(
+        f"""
+        <style>
+        .stApp {{ 
+            background-image: url("https://img.freepik.com/free-photo/human-heart-design_1048-1855.jpg?w=1060&t=st=1698164713~exp=1698165313~hmac=06ed6514b687b73223036cf7bc6f1beea09f17f3ed7550da7c02c5efd7b03673");
+            background-attachment: fixed;
+            background-size: cover
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+)
+
+choice = st.sidebar.selectbox("Options",('Predict Heart Disease','Number of Heart Patients Age-wise'))
+
+if choice == 'Predict Heart Disease':
+  try:
+    st.subheader("Predict Heart Disease")
+
+    
+    predicted = predict()
+    st.subheader("Result")
+    st.info(f"The Patient Has {predicted}")
+
+  except Exception as e:
+      st.text(f"An error occurred: {e}")
+
+elif choice == 'Number of Heart Patients Age-wise':
+    st.subheader("Number of Heart Patients Age-wise")
+    fig = age_wise()
+    st.plotly_chart(fig)
+
+else:
+  #About
+  st.header("About")
+  st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
+  #Aim
+  st.subheader("Our Aim:")
+  st.write("At the core our aim is the well-being of your heart. Heart disease is a prevalent and life-altering health concern, and early detection and proactive management are key to leading a healthy life. Our website is designed to provide you with a reliable and user-friendly tool for assessing your risk of heart disease, based on your personal health data.")
+  
+  #Privacy
+  st.subheader("Your Privacy is Our Priority")
+  st.write("We understand that health data is sensitive. Rest assured, your data's privacy and security are paramount to us. The data that is being entered is not collected by us and thus will be erased as soon as you close the app.")
+
+  # Creator's Name
+  st.header("Creator Info")
+  st.write("This Heart Disease Prediction App was created by : ")
+  st.write("- Chris Vinod Kurian")
+  st.write("- Gaurav Prakash")
+
+  # Disclaimer
+  st.warning("This application is intended for educational and informational purposes. It is not a substitute for professional medical advice. Consult a medical professional for accurate diagnosis and treatment of brain tumors.")
