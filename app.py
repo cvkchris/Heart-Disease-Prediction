@@ -70,18 +70,14 @@ def predict():
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
-    predict_button = st.button("Predict")
-    prediction_txt = "None"
-    if predict_button: 
-        if prediction == 1:
-          prediction_txt = "Heart Disease"
-        elif prediction == 0:
-          prediction_txt = "NO Heart Disease"
-        else:
-          prediction_txt = "None"          
+    if prediction == 1:
+      prediction_txt = "Heart Disease"
+      return prediction_txt
+    else:
+      prediction_txt = "NO Heart Disease"
+      return prediction_txt
 
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction_txt}")
+
 
 
 def age_wise():
