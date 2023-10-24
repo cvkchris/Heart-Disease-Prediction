@@ -91,7 +91,7 @@ def age_wise():
 
 if 'clicked' not in st.session_state:
     st.session_state.clicked = False
-    
+
 def click_button():
     st.session_state.clicked = True
 
@@ -144,7 +144,7 @@ if about:
   #Background Image Credits
   st.caption("Image by kjpargeter on Freepik")
 
-if heart_disease == True:
+if st.session_state.clicked:
   st.subheader("Predict Heart Disease")
     
   # Collect input features from the user
