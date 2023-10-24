@@ -25,19 +25,7 @@ model  = knn(n_neighbors=3)
 model = model.fit(X_train.values, Y_train.values)
 
 
-def predict():
-    # Collect input features from the user
-    age = int(st.slider('Age', 25, 70))
-    sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
-    cp = int(st.slider('Chest Pain',0, 4))
-    trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
-    chol = int(st.slider("Cholesterol level in mg/dl",125,560))
-    fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
-    restecg = st.radio("Resting ECG Result", [0,1,2,3])
-    thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
-    slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
-    ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
-    thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
+def predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal):
 
     sex_num = 0
     fbs_num = 0
@@ -61,7 +49,7 @@ def predict():
       thal_num = 3
 
     # Create a feature array with the user's input
-    features = np.array([[int(age),int(sex_num),int(cp),int(trestbps),int(chol),int(fbs_num),int(restecg), int(thalach), int(slope), int(ca), int(thal_num)]])
+    features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg,thalach,slope,ca,thal_num]])
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
@@ -151,8 +139,21 @@ if about:
 
 if heart_disease:
   st.subheader("Predict Heart Disease")
-  prediction = predict()
+  
+  # Collect input features from the user
+  age = int(st.slider('Age', 25, 70))
+  sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
+  cp = int(st.slider('Chest Pain',0, 4))
+  trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
+  chol = int(st.slider("Cholesterol level in mg/dl",125,560))
+  fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
+  restecg = st.radio("Resting ECG Result", [0,1,2,3])
+  thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
+  slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
+  ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
+  thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
+  prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal)
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
 
