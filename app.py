@@ -97,7 +97,7 @@ st.markdown(
         f"""
         <style>
         .stApp {{ 
-            background-image: url("https://img.freepik.com/free-photo/human-heart-design_1048-1855.jpg?w=1060&t=st=1698164713~exp=1698165313~hmac=06ed6514b687b73223036cf7bc6f1beea09f17f3ed7550da7c02c5efd7b03673");
+            background-image: src("Heart_background.png");
             background-attachment: fixed;
             background-size: cover
         }}
