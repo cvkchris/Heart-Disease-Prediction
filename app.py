@@ -15,14 +15,14 @@ del df['oldpeak']
 
 features = df.columns[0:11].values.tolist()
 
-x = df[features].to_numpy()
+x = df[features]
 y = df['target']
 
 X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.1, random_state=100)
 
 model  = knn(n_neighbors=3)
 
-model = model.fit(X_train, Y_train)
+model = model.fit(X_train.values, Y_train.values)
 
 
 def predict():
@@ -62,7 +62,6 @@ def predict():
 
     # Create a feature array with the user's input
     features = np.array([[int(age),int(sex_num),int(cp),int(trestbps),int(chol),int(fbs_num),int(restecg), int(thalach), int(slope), int(ca), int(thal_num)]])
-    print(features)
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
