@@ -97,7 +97,7 @@ st.markdown(
         f"""
         <style>
         .stApp {{ 
-            background-image: url("Heart_background.png");
+            background-image: url("https://raw.githubusercontent.com/cvkchris/Heart-Disease-Prediction/main/Heart_background.png");
             background-attachment: fixed;
             background-size: cover
         }}
