@@ -97,7 +97,7 @@ st.markdown(
         f"""
         <style>
         .stApp {{ 
-            background-image: src("Heart_background.png");
+            background-image: url("Heart_background.png");
             background-attachment: fixed;
             background-size: cover
         }}
