@@ -26,9 +26,6 @@ model = model.fit(X_train, Y_train)
 
 
 def predict():
-    st.title('Heart Disease Prediction using kNN')
-    st.write('This app uses kNN to predict whether a patient has heart disease or not')
-
     # Collect input features from the user
     age = int(st.slider('Age', 25, 70))
     sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
@@ -110,6 +107,7 @@ st.markdown(
         unsafe_allow_html=True
 )
 
+st.title('Heart Disease Prediction using kNN')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About")
@@ -131,7 +129,7 @@ elif age_wise_plot:
 
 else:
   #About
-  st.header("About")
+  st.subheader("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
   #Aim
   st.subheader("Our Aim:")
