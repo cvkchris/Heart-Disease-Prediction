@@ -46,7 +46,7 @@ def predict():
     sex_num = 0
     fbs_num = 0
     thal_num = 1
-    
+
     if sex == "MALE":
       sex_num = 1
     else:
@@ -130,12 +130,12 @@ if heart_disease:
   except Exception as e:
       st.text(f"An error occurred: {e}")
 
-elif age_wise_plot:
+if age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
     st.plotly_chart(fig)
 
-else:
+if about:
   #About
   st.header("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
