@@ -101,9 +101,8 @@ st.markdown(
             background-attachment: fixed;
             background-size: cover
         }}
-        .sidebar .sidebar-content {{
+        .sidebar {{
             background-image: linear-gradient(#2e7bcf,#2e7bcf);
-            color: white;
         }}    
         </style>
         """,
