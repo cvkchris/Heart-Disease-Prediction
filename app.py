@@ -37,7 +37,7 @@ def predict():
     thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
     slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
     ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
-    thal = int(st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect']))
+    thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
     sex_num = 0
     fbs_num = 0
