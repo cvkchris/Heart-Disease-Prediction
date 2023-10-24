@@ -114,7 +114,7 @@ st.markdown(
 st.title('Heart Disease Prediction using kNN')
 st.sidebar.header("Options")
 st.sidebar.divider()
-about = st.sidebar.button("About")
+about = st.sidebar.button("About", on_click=off_button)
 heart_disease = st.sidebar.button("Predict Heart Disease", on_click=on_button)
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
@@ -144,13 +144,11 @@ if st.session_state.clicked == True:
   st.info(f"The Patient Has {prediction}")
 
 elif age_wise_plot:
-    st.session_state.clicked = False
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
     st.plotly_chart(fig)
 
 elif thalach_count_plot:
-    st.session_state.clicked = False
     st.subheader("Number of Heart Patients W.R.T Thalach")
     fig = thalach_count()
     st.plotly_chart(fig)  
