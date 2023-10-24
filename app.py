@@ -15,7 +15,7 @@ del df['oldpeak']
 
 features = df.columns[0:11].values.tolist()
 
-x = df[features]
+x = df[features].to_numpy()
 y = df['target']
 
 X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.1, random_state=100)
