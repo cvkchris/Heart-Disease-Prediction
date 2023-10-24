@@ -113,6 +113,7 @@ heart_disease = st.sidebar.button("Predict Heart Disease")
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
 
+
 if about:
   #About
   st.subheader("About")
@@ -137,7 +138,7 @@ if about:
   #Background Image Credits
   st.caption("Image by kjpargeter on Freepik")
 
-if heart_disease:
+if heart_disease == True:
   st.subheader("Predict Heart Disease")
   
   # Collect input features from the user
