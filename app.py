@@ -150,15 +150,12 @@ if about:
   st.caption("Image by kjpargeter on Freepik")
 
 if heart_disease:
-  try:
-    st.subheader("Predict Heart Disease")
-    prediction = predict()
+  st.subheader("Predict Heart Disease")
+  prediction = predict()
 
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
-    
-  except Exception as e:
-      st.text(f"An error occurred: {e}")
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
+
 
 if age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
