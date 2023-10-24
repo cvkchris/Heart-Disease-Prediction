@@ -74,7 +74,19 @@ def predict():
       return prediction_txt
 
 
+def thalach_count():
+  df4 = df[['thalach', 'target']].copy()
 
+  df4['target'] = df4['target'].map({1:'Disease', 0:'No Disease'})
+
+  fig = px.histogram(df4, x='thalach', color='target', facet_col='target',
+              barmode='group',
+              title='Thalach of patients with/without Heart Disease',
+              labels={'thalach': 'thalach Count', 'target': 'Target'},
+              color_discrete_map={'No Disease': 'blue', 'Disease': 'red'})
+
+  fig.update_layout(title_x=0.5)
+  return fig
 
 def age_wise():
   df1 = df[['age', 'target']]
@@ -112,12 +124,13 @@ st.sidebar.divider()
 about = st.sidebar.button("About")
 heart_disease = st.sidebar.button("Predict Heart Disease")
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
+thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
 
 if heart_disease:
   try:
     st.subheader("Predict Heart Disease")
     prediction = predict()
-    
+
     st.subheader("Result")
     st.info(f"The Patient Has {prediction}")
     
@@ -127,6 +140,11 @@ if heart_disease:
 elif age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
+    st.plotly_chart(fig)
+
+elif thalach_count_plot:
+    st.subheader("Number of Heart Patients W.R.T Thalach")
+    fig = thalach_count()
     st.plotly_chart(fig)
 
 else:
