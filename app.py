@@ -119,8 +119,37 @@ heart_disease = st.sidebar.button("Predict Heart Disease", on_click=click_button
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
 
+if st.session_state.clicked:
+  st.subheader("Predict Heart Disease")
+    
+  # Collect input features from the user
+  age = int(st.slider('Age', 25, 70))
+  sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
+  cp = int(st.slider('Chest Pain',0, 4))
+  trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
+  chol = int(st.slider("Cholesterol level in mg/dl",125,560))
+  fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
+  restecg = st.radio("Resting ECG Result", [0,1,2,3])
+  thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
+  slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
+  ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
+  thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
-if about:
+  prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
+
+elif age_wise_plot:
+    st.subheader("Number of Heart Patients Age-wise")
+    fig = age_wise()
+    st.plotly_chart(fig)
+
+elif thalach_count_plot:
+    st.subheader("Number of Heart Patients W.R.T Thalach")
+    fig = thalach_count()
+    st.plotly_chart(fig)  
+
+else:
   #About
   st.subheader("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
@@ -142,35 +171,4 @@ if about:
   st.warning("This application is intended for educational and informational purposes. It is not a substitute for professional medical advice. Consult a medical professional for accurate diagnosis and treatment.")
 
   #Background Image Credits
-  st.caption("Image by kjpargeter on Freepik")
-
-if st.session_state.clicked:
-  st.subheader("Predict Heart Disease")
-    
-  # Collect input features from the user
-  age = int(st.slider('Age', 25, 70))
-  sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
-  cp = int(st.slider('Chest Pain',0, 4))
-  trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
-  chol = int(st.slider("Cholesterol level in mg/dl",125,560))
-  fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
-  restecg = st.radio("Resting ECG Result", [0,1,2,3])
-  thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
-  slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
-  ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
-  thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
-
-  prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal)
-  st.subheader("Result")
-  st.info(f"The Patient Has {prediction}")
-
-
-if age_wise_plot:
-    st.subheader("Number of Heart Patients Age-wise")
-    fig = age_wise()
-    st.plotly_chart(fig)
-
-if thalach_count_plot:
-    st.subheader("Number of Heart Patients W.R.T Thalach")
-    fig = thalach_count()
-    st.plotly_chart(fig)  
+  st.caption("Image by kjpargeter on Freepik")    
