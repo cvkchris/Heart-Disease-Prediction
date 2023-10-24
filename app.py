@@ -152,3 +152,6 @@ else:
 
   # Disclaimer
   st.warning("This application is intended for educational and informational purposes. It is not a substitute for professional medical advice. Consult a medical professional for accurate diagnosis and treatment of brain tumors.")
+
+  #Background Image Credits
+  st.caption("Image by kjpargeter on Freepik")
