@@ -103,9 +103,13 @@ st.markdown(
         unsafe_allow_html=True
 )
 
-choice = st.sidebar.selectbox("Options",('Predict Heart Disease','Number of Heart Patients Age-wise'))
+st.sidebar.header("Options")
+st.sidebar.divider()
+about = st.sidebar.button("About")
+heart_disease = st.sidebar.button("Predict Heart Disease")
+age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 
-if choice == 'Predict Heart Disease':
+if heart_disease:
   try:
     st.subheader("Predict Heart Disease")
 
@@ -117,7 +121,7 @@ if choice == 'Predict Heart Disease':
   except Exception as e:
       st.text(f"An error occurred: {e}")
 
-elif choice == 'Number of Heart Patients Age-wise':
+elif age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
     fig = age_wise()
     st.plotly_chart(fig)
