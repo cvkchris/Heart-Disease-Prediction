@@ -70,9 +70,12 @@ def predict():
     
     if predict_button: 
         if prediction == 1:
-            prediction_txt = "Heart Disease"
+          prediction_txt = "Heart Disease"
+        elif prediction == 0:
+          prediction_txt = "NO Heart Disease"
         else:
-            prediction_txt = "NO Heart Disease"
+          prediction_txt = "None"
+           
 
     return prediction_txt
 
