@@ -116,7 +116,10 @@ age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 if heart_disease:
   try:
     st.subheader("Predict Heart Disease")
-    predict()
+    prediction = predict()
+    
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction}")
     
   except Exception as e:
       st.text(f"An error occurred: {e}")
