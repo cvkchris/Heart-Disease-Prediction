@@ -190,7 +190,7 @@ else:
   st.write("We understand that health data is sensitive. Rest assured, your data's privacy and security are paramount to us. The data that is being entered is not collected by us and thus will be erased as soon as you close the app.")
 
   # Creator's Name
-  st.header("Creator Info")
+  st.subheader("Creator Info")
   st.write("This Heart Disease Prediction App was created by : ")
   st.write("- Chris Vinod Kurian")
   st.write("- Gaurav Prakash")
