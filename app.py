@@ -72,7 +72,6 @@ def thalach_count():
               labels={'thalach': 'thalach Count', 'target': 'Target'},
               color_discrete_map={'No Disease': 'blue', 'Disease': 'red'})
 
-  fig.update_layout(title_x=0.5)
   return fig
 
 def age_wise():
@@ -86,7 +85,6 @@ def age_wise():
     yaxis_title="Number of Heart Patients",
     title="Number of Heart Patients VS Age"
   )
-  fig.update_layout(title_x=0.5)
   return fig
 
 def gender_distribution():
@@ -104,7 +102,6 @@ def gender_distribution():
   fig = px.pie(gender_distribution, names='Gender', values='Count', title='Distribution of Gender in Heart Patients', 
               labels={'Gender': 'Gender'}, hole=0.3)
 
-  fig.update_layout(title_x=0.5)
   return fig
 
 def on_button():
