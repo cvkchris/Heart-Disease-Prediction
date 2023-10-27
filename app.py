@@ -184,21 +184,21 @@ if 'lr' not in st.session_state:
   st.session_state.lr = False
   
 
-if knn_button: 
+if st.session_state.knn == True: 
   st.header("Predict Heart Disease") 
   st.subheader("KNN Model") 
   prediction = predict(knn_model)
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
 
-elif nb_button:
+elif st.session_state.nb == True:
   st.header("Predict Heart Disease") 
   st.subheader("Naive Bayes Model") 
   prediction = predict(gnb)
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
 
-elif lr_button:
+elif st.session_state.lr == True:
   st.header("Predict Heart Disease") 
   st.subheader("Logistic Regrssion Model") 
   prediction = predict(lr)
