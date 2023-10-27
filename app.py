@@ -126,14 +126,26 @@ def gender_distribution():
 
 def on_button(selection_input):
     if selection_input == 'knn':
-        st.session_state['selection'] = 0
+      st.session_state.nb = False
+      st.session_state.lr = False
+      st.session_state.knn = True
+
     if selection_input == 'nb':
-        st.session_state['selection'] = 1
+      st.session_state.knn = False
+      st.session_state.lr = False
+      st.session_state.nb = True
+
     if selection_input == 'lr':
-       st.session_state['selection'] = 2
+      st.session_state.knn = False
+      st.session_state.nb = False
+      st.session_state.lr = True
+       
 
 def off_button():
-  st.session_state.clicked = False
+  st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
+
 
 st.markdown(
         f"""
@@ -162,8 +174,15 @@ age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
 gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
 
-if 'clicked' not in st.session_state:
-  st.session_state.clicked = False
+if 'knn' not in st.session_state:
+  st.session_state.knn = False
+
+if 'nb' not in st.session_state:
+  st.session_state.nb = False
+
+if 'lr' not in st.session_state:
+  st.session_state.lr = False
+  
 
 if knn_button: 
   st.header("Predict Heart Disease") 
