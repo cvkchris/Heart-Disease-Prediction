@@ -156,6 +156,7 @@ age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
 gender_distribution_plot = st.sidebar.button("Gender Distribution")
 
+st.write(st.session_state)
 
 if knn_button:
   st.session_state.knn = True
