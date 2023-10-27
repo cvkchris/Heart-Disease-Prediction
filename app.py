@@ -137,7 +137,7 @@ st.markdown(
         }}
 
         button.st-emotion-cache-hc3laj{{
-            width = 190px;
+            width : 190px;
         }}    
         </style>
         """,
