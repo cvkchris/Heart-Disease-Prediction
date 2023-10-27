@@ -24,10 +24,10 @@ y = df['target'].to_numpy()
 X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.1, random_state=100)
 
 knn_model  = knn(n_neighbors=3)
-knn_model = knn_model.fit(X_train.values, Y_train.values)
+knn_model = knn_model.fit(X_train, Y_train)
 
 gnb = GaussianNB()
-gnb.fit(X_train.values, Y_train.values)
+gnb.fit(X_train, Y_train)
 
 lr = LogisticRegression(max_iter = 1000)
 lr.fit(X_train, Y_train)
