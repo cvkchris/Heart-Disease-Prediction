@@ -127,13 +127,19 @@ def gender_distribution():
 def on_button(selection_input):
     if selection_input == 'knn':
       st.session_state.knn = True
+      st.session_state.nb = False
+      st.session_state.lr = False
+
 
     if selection_input == 'nb':
       st.session_state.nb = True
-
+      st.session_state.knn = False
+      st.session_state.lr = False
+    
     if selection_input == 'lr':
       st.session_state.lr = True
-       
+      st.session_state.knn = False
+      st.session_state.nb = False
 
 def off_button():
   st.session_state.knn = False
