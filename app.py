@@ -140,21 +140,17 @@ st.markdown(
         unsafe_allow_html=True
 )
 
-def off_button():
-  st.session_state.knn = False
-  st.session_state.nb = False
-  st.session_state.lr = False
 
 st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
-about = st.sidebar.button("About", on_click=off_button())
+about = st.sidebar.button("About")
 knn_button = st.sidebar.button('KNN')
 nb_button = st.sidebar.button('Naive Bayes')
 lr_button = st.sidebar.button('Logistic Regression')
-age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button())
-thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button())
-gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button())
+age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
+thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
+gender_distribution_plot = st.sidebar.button("Gender Distribution")
 
 
 if knn_button:
@@ -190,6 +186,30 @@ elif lr_button:
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
 
+elif age_wise_plot:
+  st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
+  st.subheader("Number of Heart Patients Age-wise")
+  fig = age_wise()
+  st.plotly_chart(fig)
+
+elif thalach_count_plot:
+  st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
+  st.subheader("Number of Heart Patients W.R.T Thalach")
+  fig = thalach_count()
+  st.plotly_chart(fig) 
+
+elif gender_distribution_plot:
+  st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
+  st.subheader("Gender Distribution of Heart Diseased Patients")
+  fig = gender_distribution()
+  st.plotly_chart(fig)   
+
 elif st.session_state.knn:
   st.header("Predict Heart Disease") 
   st.subheader("KNN Model") 
@@ -210,21 +230,6 @@ elif st.session_state.lr == True:
   prediction = predict(lr)
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
-
-elif age_wise_plot:
-  st.subheader("Number of Heart Patients Age-wise")
-  fig = age_wise()
-  st.plotly_chart(fig)
-
-elif thalach_count_plot:
-  st.subheader("Number of Heart Patients W.R.T Thalach")
-  fig = thalach_count()
-  st.plotly_chart(fig) 
-
-elif gender_distribution_plot:
-  st.subheader("Gender Distribution of Heart Diseased Patients")
-  fig = gender_distribution()
-  st.plotly_chart(fig) 
 
 else:
   #About
