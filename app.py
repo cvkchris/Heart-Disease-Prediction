@@ -179,7 +179,8 @@ st.session_state.nb = False
 st.session_state.lr = False
 
 if knn_button:
-  while st.session_state.knn == True: 
+  st.session_state.knn = True
+  if st.session_state.knn == True: 
     st.header("Predict Heart Disease") 
     st.subheader("KNN Model") 
     prediction = predict(knn_model)
@@ -187,7 +188,7 @@ if knn_button:
     st.info(f"The Patient Has {prediction}")
 
 elif nb_button:
-  while st.session_state.nb == True:
+  if st.session_state.nb == True:
     st.header("Predict Heart Disease") 
     st.subheader("Naive Bayes Model") 
     prediction = predict(gnb)
@@ -195,7 +196,7 @@ elif nb_button:
     st.info(f"The Patient Has {prediction}")
 
 elif lr_button:
-  while st.session_state.lr == True:
+  if st.session_state.lr == True:
     st.header("Predict Heart Disease") 
     st.subheader("Logistic Regrssion Model") 
     prediction = predict(lr)
