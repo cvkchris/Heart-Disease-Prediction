@@ -202,7 +202,8 @@ elif lr_button:
   st.session_state.nb = False
   st.session_state.knn = False
 
-elif st.session_state.knn == True: 
+elif st.session_state.knn:
+  st.write(st.session_state) 
   st.header("Predict Heart Disease") 
   st.subheader("KNN Model") 
   prediction = predict(knn_model)
