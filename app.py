@@ -185,6 +185,12 @@ if knn_button:
   st.session_state.knn = True
   st.session_state.nb = False
   st.session_state.lr = False
+  
+  st.header("Predict Heart Disease") 
+  st.subheader("KNN Model") 
+  prediction = predict(knn_model)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
 elif nb_button:
   st.session_state.nb = True
