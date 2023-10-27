@@ -126,8 +126,7 @@ def gender_distribution():
 
 def on_knn():
   st.session_state.knn = True
-  st.session_state.nb = False
-  st.session_state.lr = False
+  
 
 def on_nb():
   st.session_state.nb = True
@@ -182,42 +181,56 @@ if 'nb' not in st.session_state:
 if 'lr' not in st.session_state:  
   st.session_state.lr = False
 
+if knn_button:
+  st.session_state.knn = True
+  st.session_state.nb = False
+  st.session_state.lr = False
 
-if st.session_state.knn == True: 
-    st.header("Predict Heart Disease") 
-    st.subheader("KNN Model") 
-    prediction = predict(knn_model)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
+elif nb_button:
+  st.session_state.nb = True
+  st.session_state.lr = False
+  st.session_state.knn = False
+
+elif lr_button:
+  st.session_state.lr = True
+  st.session_state.nb = False
+  st.session_state.knn = False
+
+elif st.session_state.knn == True: 
+  st.header("Predict Heart Disease") 
+  st.subheader("KNN Model") 
+  prediction = predict(knn_model)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
 elif st.session_state.nb == True:
-    st.header("Predict Heart Disease") 
-    st.subheader("Naive Bayes Model") 
-    prediction = predict(gnb)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
+  st.header("Predict Heart Disease") 
+  st.subheader("Naive Bayes Model") 
+  prediction = predict(gnb)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
 elif st.session_state.lr == True:
-    st.header("Predict Heart Disease") 
-    st.subheader("Logistic Regrssion Model") 
-    prediction = predict(lr)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
+  st.header("Predict Heart Disease") 
+  st.subheader("Logistic Regrssion Model") 
+  prediction = predict(lr)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
 elif age_wise_plot:
-    st.subheader("Number of Heart Patients Age-wise")
-    fig = age_wise()
-    st.plotly_chart(fig)
+  st.subheader("Number of Heart Patients Age-wise")
+  fig = age_wise()
+  st.plotly_chart(fig)
 
 elif thalach_count_plot:
-    st.subheader("Number of Heart Patients W.R.T Thalach")
-    fig = thalach_count()
-    st.plotly_chart(fig) 
+  st.subheader("Number of Heart Patients W.R.T Thalach")
+  fig = thalach_count()
+  st.plotly_chart(fig) 
 
 elif gender_distribution_plot:
-    st.subheader("Gender Distribution of Heart Diseased Patients")
-    fig = gender_distribution()
-    st.plotly_chart(fig) 
+  st.subheader("Gender Distribution of Heart Diseased Patients")
+  fig = gender_distribution()
+  st.plotly_chart(fig) 
 
 else:
   #About
