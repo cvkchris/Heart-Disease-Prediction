@@ -162,7 +162,7 @@ if "knn" not in st.session_state:
   st.session_state.lr = False
 
 if about:
-  st.session_state.knn = True
+  st.session_state.knn = False
   st.session_state.nb = False
   st.session_state.lr = False
 
