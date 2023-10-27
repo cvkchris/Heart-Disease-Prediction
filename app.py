@@ -5,6 +5,9 @@ import pandas as pd
 import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier as knn
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+
 
 df1 = pd.read_csv("heart(1).csv")
 df2 = pd.read_csv('heart.csv')
@@ -15,17 +18,21 @@ del df['oldpeak']
 
 features = df.columns[0:11].values.tolist()
 
-x = df[features]
-y = df['target']
+x = df[features].to_numpy()
+y = df['target'].to_numpy()
 
 X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.1, random_state=100)
 
-model  = knn(n_neighbors=3)
+knn_model  = knn(n_neighbors=3)
+knn_model = knn_model.fit(X_train.values, Y_train.values)
 
-model = model.fit(X_train.values, Y_train.values)
+gnb = GaussianNB()
+gnb.fit(X_train.values, Y_train.values)
 
+lr = LogisticRegression(max_iter = 1000)
+lr.fit(X_train, Y_train)
 
-def predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal):
+def predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal, model):
 
     sex_num = 0
     fbs_num = 0
@@ -50,6 +57,7 @@ def predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal):
 
     # Create a feature array with the user's input
     features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg,thalach,slope,ca,thal_num]])
+
     # Make predictions using the kNN model
     prediction = model.predict(features)
 
@@ -68,7 +76,6 @@ def thalach_count():
 
   fig = px.histogram(df4, x='thalach', color='target', facet_col='target',
               barmode='group',
-              title='Thalach of patients with/without Heart Disease',
               labels={'thalach': 'thalach Count', 'target': 'Target'},
               color_discrete_map={'No Disease': 'blue', 'Disease': 'red'})
 
@@ -104,6 +111,7 @@ def gender_distribution():
 
   return fig
 
+
 def on_button():
     st.session_state.clicked = True
 
@@ -130,7 +138,7 @@ st.title('Heart Disease Prediction using kNN')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About", on_click=off_button)
-heart_disease = st.sidebar.button("Predict Heart Disease", on_click=on_button)
+choice = st.sidebar.selectbox("Predict Heart Disease ",('KNN','Naive Bayes','Logistic Regression'))
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
 gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
@@ -138,10 +146,8 @@ gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off
 if 'clicked' not in st.session_state:
   st.session_state.clicked = False
 
-
-if st.session_state.clicked == True:
-  st.subheader("Predict Heart Disease")
-    
+if choice: 
+  st.header("Predict Heart Disease") 
   # Collect input features from the user
   age = int(st.slider('Age', 25, 70))
   sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
@@ -155,9 +161,23 @@ if st.session_state.clicked == True:
   ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
   thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
-  prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal)
-  st.subheader("Result")
-  st.info(f"The Patient Has {prediction}")
+  if choice == 'KNN':
+    st.subheader("KNN Model") 
+    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,knn_model)
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction}")
+
+  elif  choice == 'Naive Bayes':
+    st.subheader("Naive Bayes Model") 
+    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,gnb)
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction}")
+
+  else:
+    st.subheader("Logistic Regrssion Model") 
+    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,lr)
+    st.subheader("Result")
+    st.info(f"The Patient Has {prediction}")
 
 elif age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
