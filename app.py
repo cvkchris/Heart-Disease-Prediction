@@ -32,7 +32,20 @@ gnb.fit(X_train, Y_train)
 lr = LogisticRegression(max_iter = 1000)
 lr.fit(X_train, Y_train)
 
-def predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal, model):
+def predict(model):
+    
+    # Collect input features from the user
+    age = int(st.slider('Age', 25, 70))
+    sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
+    cp = int(st.slider('Chest Pain',0, 4))
+    trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
+    chol = int(st.slider("Cholesterol level in mg/dl",125,560))
+    fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
+    restecg = st.radio("Resting ECG Result", [0,1,2,3])
+    thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
+    slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
+    ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
+    thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
     sex_num = 0
     fbs_num = 0
@@ -111,9 +124,13 @@ def gender_distribution():
 
   return fig
 
-
-def on_button():
-    st.session_state.clicked = True
+def on_button(selection_input):
+    if selection_input == 'knn':
+        st.session_state['selection'] = 0
+    if selection_input == 'nb':
+        st.session_state['selection'] = 1
+    if selection_input == 'lr':
+       st.session_state['selection'] = 2
 
 def off_button():
   st.session_state.clicked = False
@@ -138,7 +155,9 @@ st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About", on_click=off_button)
-choice = st.sidebar.selectbox("Predict Heart Disease ",('KNN','Naive Bayes','Logistic Regression'))
+knn_button = st.sidebar.button('KNN', on_click=on_button, args='knn')
+nb_button = st.sidebar.button('Naive Bayes', on_click=on_button, args='nb')
+lr_button = st.sidebar.button('Logistic Regression', on_click=on_button, args='lr')
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
 gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
@@ -146,38 +165,26 @@ gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off
 if 'clicked' not in st.session_state:
   st.session_state.clicked = False
 
-if choice: 
+if knn_button: 
   st.header("Predict Heart Disease") 
-  # Collect input features from the user
-  age = int(st.slider('Age', 25, 70))
-  sex = st.radio('Sex', ["***MALE***","***FEMALE***"])
-  cp = int(st.slider('Chest Pain',0, 4))
-  trestbps = int(st.slider('Resting Systolic Blood Pressure (during admission in hospital) in mm/Hg', 95, 200))
-  chol = int(st.slider("Cholesterol level in mg/dl",125,560))
-  fbs = st.radio("Is Fasting Blood Sugar > 120 mg/dl", ["YES","NO"])
-  restecg = st.radio("Resting ECG Result", [0,1,2,3])
-  thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
-  slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
-  ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
-  thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
+  st.subheader("KNN Model") 
+  prediction = predict(knn_model)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
-  if choice == 'KNN':
-    st.subheader("KNN Model") 
-    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,knn_model)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
+elif nb_button:
+  st.header("Predict Heart Disease") 
+  st.subheader("Naive Bayes Model") 
+  prediction = predict(gnb)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
-  elif  choice == 'Naive Bayes':
-    st.subheader("Naive Bayes Model") 
-    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,gnb)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
-
-  else:
-    st.subheader("Logistic Regrssion Model") 
-    prediction = predict(age,sex,cp,trestbps,chol,fbs,restecg,thalach,slope,ca,thal,lr)
-    st.subheader("Result")
-    st.info(f"The Patient Has {prediction}")
+elif lr_button:
+  st.header("Predict Heart Disease") 
+  st.subheader("Logistic Regrssion Model") 
+  prediction = predict(lr)
+  st.subheader("Result")
+  st.info(f"The Patient Has {prediction}")
 
 elif age_wise_plot:
     st.subheader("Number of Heart Patients Age-wise")
