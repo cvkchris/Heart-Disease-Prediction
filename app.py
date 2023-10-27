@@ -132,8 +132,12 @@ st.markdown(
             background-attachment: fixed;
             background-size: cover
         }}
-        .sidebar {{
+        div.stSidebarUserContent {{
             background-image: linear-gradient(#2e7bcf,#2e7bcf);
+        }}
+
+        div.row-widget.stButton{{
+            width = 190px;
         }}    
         </style>
         """,
