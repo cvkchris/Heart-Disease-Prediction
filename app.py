@@ -124,22 +124,20 @@ def gender_distribution():
 
   return fig
 
-def on_button(selection_input):
-    if selection_input == "knn":
-      st.session_state.knn = True
-      st.session_state.nb = False
-      st.session_state.lr = False
+def on_knn():
+  st.session_state.knn = True
+  st.session_state.nb = False
+  st.session_state.lr = False
 
-
-    if selection_input == "nb":
-      st.session_state.nb = True
-      st.session_state.knn = False
-      st.session_state.lr = False
+def on_nb():
+  st.session_state.nb = True
+  st.session_state.knn = False
+  st.session_state.lr = False
     
-    if selection_input == "lr":
-      st.session_state.lr = True
-      st.session_state.knn = False
-      st.session_state.nb = False
+def on_lr():
+  st.session_state.lr = True
+  st.session_state.knn = False
+  st.session_state.nb = False
 
 def off_button():
   st.session_state.knn = False
@@ -167,9 +165,9 @@ st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About", on_click=off_button)
-knn_button = st.sidebar.button('KNN', on_click=on_button("knn"))
-nb_button = st.sidebar.button('Naive Bayes', on_click=on_button("nb"))
-lr_button = st.sidebar.button('Logistic Regression', on_click=on_button("lr"))
+knn_button = st.sidebar.button('KNN', on_click=on_knn())
+nb_button = st.sidebar.button('Naive Bayes', on_click=on_nb())
+lr_button = st.sidebar.button('Logistic Regression', on_click=on_lr())
 age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
 thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
 gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
