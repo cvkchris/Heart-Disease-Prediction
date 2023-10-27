@@ -214,7 +214,7 @@ elif gender_distribution_plot:
   fig = gender_distribution()
   st.plotly_chart(fig)   
 
-elif st.session_state.knn:
+elif st.session_state.knn == True:
   st.header("Predict Heart Disease") 
   st.subheader("KNN Model") 
   prediction = predict(knn_model)
