@@ -172,14 +172,14 @@ thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_
 gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button())
 
 
-if "knn" not in st.session_state:
-  st.session_state.knn = False
+# if "knn" not in st.session_state:
+#   st.session_state.knn = False
 
-if "nb" not in st.session_state:  
-  st.session_state.nb = False
+# if "nb" not in st.session_state:  
+#   st.session_state.nb = False
 
-if "lr" not in st.session_state:  
-  st.session_state.lr = False
+# if "lr" not in st.session_state:  
+#   st.session_state.lr = False
 
 if knn_button:
   st.session_state.knn = True
