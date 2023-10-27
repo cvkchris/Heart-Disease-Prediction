@@ -136,7 +136,7 @@ st.markdown(
             background-image: linear-gradient(#2e7bcf,#2e7bcf);
         }}
 
-        div.row-widget.stButton{{
+        button.st-emotion-cache-hc3laj{{
             width = 190px;
         }}    
         </style>
@@ -158,6 +158,11 @@ gender_distribution_plot = st.sidebar.button("Gender Distribution")
 
 if "knn" not in st.session_state:
   st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
+
+if about:
+  st.session_state.knn = True
   st.session_state.nb = False
   st.session_state.lr = False
 
