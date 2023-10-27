@@ -134,7 +134,7 @@ st.markdown(
         unsafe_allow_html=True
 )
 
-st.title('Heart Disease Prediction using kNN')
+st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
 about = st.sidebar.button("About", on_click=off_button)
