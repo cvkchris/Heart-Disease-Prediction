@@ -125,18 +125,18 @@ def gender_distribution():
   return fig
 
 def on_button(selection_input):
-    if selection_input == 'knn':
+    if selection_input == "knn":
       st.session_state.knn = True
       st.session_state.nb = False
       st.session_state.lr = False
 
 
-    if selection_input == 'nb':
+    if selection_input == "nb":
       st.session_state.nb = True
       st.session_state.knn = False
       st.session_state.lr = False
     
-    if selection_input == 'lr':
+    if selection_input == "lr":
       st.session_state.lr = True
       st.session_state.knn = False
       st.session_state.nb = False
@@ -178,9 +178,8 @@ st.session_state.knn = False
 st.session_state.nb = False
 st.session_state.lr = False
 
-if knn_button:
-  st.session_state.knn = True
-  if st.session_state.knn == True: 
+
+if st.session_state.knn == True or knn_button == True: 
     st.header("Predict Heart Disease") 
     st.subheader("KNN Model") 
     prediction = predict(knn_model)
