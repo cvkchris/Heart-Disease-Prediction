@@ -138,10 +138,10 @@ def gender_distribution():
 #   st.session_state.knn = False
 #   st.session_state.nb = False
 
-def off_button():
-  st.session_state.knn = False
-  st.session_state.nb = False
-  st.session_state.lr = False
+# def off_button():
+#   st.session_state.knn = False
+#   st.session_state.nb = False
+#   st.session_state.lr = False
 
 
 st.markdown(
@@ -163,13 +163,13 @@ st.markdown(
 st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
-about = st.sidebar.button("About", on_click=off_button())
+about = st.sidebar.button("About")
 knn_button = st.sidebar.button('KNN')
 nb_button = st.sidebar.button('Naive Bayes')
 lr_button = st.sidebar.button('Logistic Regression')
-age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button())
-thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button())
-gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button())
+age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise')
+thalach_count_plot = st.sidebar.button("Thalach Plot of Patients")
+gender_distribution_plot = st.sidebar.button("Gender Distribution")
 
 
 # if "knn" not in st.session_state:
