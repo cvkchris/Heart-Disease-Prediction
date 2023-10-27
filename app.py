@@ -234,7 +234,7 @@ elif st.session_state.nb == True:
 
 elif st.session_state.lr == True:
   st.header("Predict Heart Disease") 
-  st.subheader("Logistic Regrssion Model") 
+  st.subheader("Logistic Regression Model") 
   prediction = predict(lr)
   st.subheader("Result")
   st.info(f"The Patient Has {prediction}")
