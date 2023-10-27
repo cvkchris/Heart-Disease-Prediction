@@ -221,6 +221,7 @@ elif gender_distribution_plot:
 
 else:
   #About
+  st.write(st.session_state)
   st.subheader("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically using:")
   st.write("- K-Nearest Neighbors (KNN) model")
