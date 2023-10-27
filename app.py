@@ -236,6 +236,9 @@ elif st.session_state.lr == True:
   st.info(f"The Patient Has {prediction}")
 
 else:
+  st.session_state.knn = False
+  st.session_state.nb = False
+  st.session_state.lr = False
   #About
   st.subheader("About")
   st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically using:")
