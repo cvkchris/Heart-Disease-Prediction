@@ -197,7 +197,11 @@ elif gender_distribution_plot:
 else:
   #About
   st.subheader("About")
-  st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically the K-Nearest Neighbors (KNN) algorithm, to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not using KNN.")
+  st.write("Welcome to our Heart Disease Prediction website! We are dedicated to utilizing the power of machine learning, specifically using:")
+  st.write("- K-Nearest Neighbors (KNN) model")
+  st.write("- Naive Bayes model")
+  st.write("- Logistic Regression model") 
+  st.write("to help you make informed decisions about your heart health. This application is designed to predict whether a patient has any heart disease or not from the input parameters.")
   #Aim
   st.subheader("Our Aim:")
   st.write("At the core our aim is the well-being of your heart. Heart disease is a prevalent and life-altering health concern, and early detection and proactive management are key to leading a healthy life. Our website is designed to provide you with a reliable and user-friendly tool for assessing your risk of heart disease, based on your personal health data.")
