@@ -164,13 +164,13 @@ st.markdown(
 st.title('Heart Disease Prediction')
 st.sidebar.header("Options")
 st.sidebar.divider()
-about = st.sidebar.button("About", on_click=off_button)
+about = st.sidebar.button("About", on_click=off_button())
 knn_button = st.sidebar.button('KNN', on_click=on_knn())
 nb_button = st.sidebar.button('Naive Bayes', on_click=on_nb())
 lr_button = st.sidebar.button('Logistic Regression', on_click=on_lr())
-age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button)
-thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button)
-gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button)
+age_wise_plot = st.sidebar.button('Number of Heart Patients Age-wise', on_click=off_button())
+thalach_count_plot = st.sidebar.button("Thalach Plot of Patients", on_click=off_button())
+gender_distribution_plot = st.sidebar.button("Gender Distribution", on_click=off_button())
 
 
 if 'knn' not in st.session_state:
