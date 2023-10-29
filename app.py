@@ -11,7 +11,8 @@ from sklearn.linear_model import LogisticRegression
 
 df1 = pd.read_csv("heart(1).csv")
 df2 = pd.read_csv('heart.csv')
-df3 = pd.read_csv("heart(3).csv")
+df3 = pd.read_csv("heart(2).csv")
+
 df = pd.concat([df1, df2, df3], ignore_index=True)
 
 df = df.drop_duplicates()
