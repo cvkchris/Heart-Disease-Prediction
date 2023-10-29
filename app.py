@@ -11,19 +11,24 @@ from sklearn.linear_model import LogisticRegression
 
 df1 = pd.read_csv("heart(1).csv")
 df2 = pd.read_csv('heart.csv')
-df = pd.concat([df1, df2], ignore_index=True)
+df3 = pd.read_csv("heart(3).csv")
+df = pd.concat([df1, df2, df3], ignore_index=True)
 
+df = df.drop_duplicates()
+
+del df['ca']
+del df['thal']
 del df['exang']
 del df['oldpeak']
 
-features = df.columns[0:11].values.tolist()
+features = df.columns[0:9].values.tolist()
 
 x = df[features].to_numpy()
 y = df['target'].to_numpy()
 
 X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.1, random_state=100)
 
-knn_model  = knn(n_neighbors=3)
+knn_model  = knn(n_neighbors=141)
 knn_model = knn_model.fit(X_train, Y_train)
 
 gnb = GaussianNB()
@@ -44,8 +49,6 @@ def predict(model):
     restecg = st.radio("Resting ECG Result", [0,1,2,3])
     thalach = int(st.slider("Maximum Heart Rate Achieved", 70,200))
     slope = int(st.radio("Slope of Peak Exercise ST Segment", [0,1,2]))
-    ca = int(st.radio("Number of Major Vessels colored by Flourosopy", [0,1,2,3,4]))
-    thal = st.radio("Thalassemia", ['Normal', 'Fixed Defect', 'Reversible Defect'])
 
     sex_num = 0
     fbs_num = 0
@@ -61,15 +64,8 @@ def predict(model):
     else:
       fbs_num = 0
 
-    if thal == "Normal":
-      thal_num = 1
-    elif thal == 'Fixed Defect':
-      thal_num = 2
-    else:
-      thal_num = 3
-
     # Create a feature array with the user's input
-    features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg,thalach,slope,ca,thal_num]])
+    features = np.array([[age,sex_num,cp,trestbps,chol,fbs_num,restecg,thalach,slope]])
 
     # Make predictions using the kNN model
     prediction = model.predict(features)
@@ -95,11 +91,11 @@ def thalach_count():
   return fig
 
 def age_wise():
-  df1 = df[['age', 'target']]
-  df1 = df1[df1['target']==1]
-  df1 = pd.DataFrame(df1.groupby('age')['target'].count())
+  df5 = df[['age', 'target']]
+  df5 = df5[df5['target']==1]
+  df5 = pd.DataFrame(df5.groupby('age')['target'].count())
 
-  fig = px.bar(df1, x=df1.index, y="target")
+  fig = px.bar(df5, x=df5.index, y="target")
   fig.update_layout(
     xaxis_title="Age",
     yaxis_title="Number of Heart Patients",
@@ -108,19 +104,18 @@ def age_wise():
   return fig
 
 def gender_distribution():
-  df3 = df[['sex', 'target']].copy()
-  df3['target'].replace(0, None, inplace=True)
+  df6 = df[['sex', 'target']].copy()
+  df6['sex'] = df6['sex'].map({1:'Male', 0:'Female'})
+  df6['target'] = df6['target'].map({1:'Diseased', 0:'Normal'})
 
-  df3 = df3.dropna()
+  # Count the gender distribution
+  gender_distribution = df6.value_counts().reset_index()
+  gender_distribution.columns = ['Gender','Target','Count']
 
-  df3['sex'] = df3['sex'].map({1:'Male', 0:'Female'})
+  gender_distribution['Patients'] = gender_distribution['Target']+ " " + gender_distribution['Gender']
 
-  gender_distribution = df3['sex'].value_counts().reset_index()
-
-  gender_distribution.columns = ['Gender', 'Count']
-
-  fig = px.pie(gender_distribution, names='Gender', values='Count', title='Distribution of Gender in Heart Patients', 
-              labels={'Gender': 'Gender'}, hole=0.3)
+  fig = px.pie(gender_distribution, values='Count', names='Patients',
+              title='Distribution of Patients by Gender')
 
   return fig
 
