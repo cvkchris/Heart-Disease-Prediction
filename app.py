@@ -9,8 +9,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LogisticRegression
 
 
-df1 = pd.read_csv("heart(1).csv")
-df2 = pd.read_csv('heart.csv')
+df1 = pd.read_csv("heart.csv")
+df2 = pd.read_csv("heart(1).csv")
 df3 = pd.read_csv("heart(2).csv")
 
 df = pd.concat([df1, df2, df3], ignore_index=True)
